@@ -4,8 +4,12 @@ You need to add relevant npm libraries and of course run npm install.
 You are given sample images for the project in the public folder. Feel free to use them or replace them with your own images.
 ## Authors
 
-Name and email:
+<h1>Yael Karat</h1>
+<p>Email: yaelkara@edu.hac.ac.il</p>
 
+<h1>Amit Lap</h1>
+<p>Email: amitlap@edu.hac.ac.il</p>
+<br>
 ## General Information
 
 
