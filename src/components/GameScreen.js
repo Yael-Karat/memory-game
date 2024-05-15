@@ -71,6 +71,7 @@ import Card from './Card';
 import { shuffleCards, checkMatch } from '../utils/gameLogic';
 import { calculateScore } from '../utils/scoreCalculator';
 import { saveToLocalStorage, loadFromLocalStorage } from '../utils/storage';
+import LeaderboardTable from './LeaderboardTable';
 
 const Game = () => {
     const location = useLocation();
@@ -85,6 +86,7 @@ const Game = () => {
     const [gameOver, setGameOver] = useState(false);
     const [playerRank, setPlayerRank] = useState(null);
     const [finalScore, setFinalScore] = useState(null);
+    const [leaderboard, setLeaderboard] = useState([]);
 
     useEffect(() => {
         if (!name || !settings) {
@@ -122,7 +124,7 @@ const Game = () => {
         setSteps(steps + 1);
     };
 
-    const handleAbandon = () => {
+    const handleFinish = () => {
         navigate('/');
     };
 
@@ -147,6 +149,7 @@ const Game = () => {
 
             const rank = leaderboard.findIndex(entry => entry.name === normalizedName) + 1;
             setPlayerRank(rank);
+            setLeaderboard(leaderboard);
         }
     }, [gameOver, name, rows, cols, steps]);
 
@@ -173,16 +176,24 @@ const Game = () => {
                     <p>Score: {finalScore}</p>
                     <p>Rank: {playerRank}</p>
                     <p>Number of cards: {rows * cols}</p>
-                    <Button variant="info" onClick={() => navigate('/leaderboard')}>View Leaderboard</Button>
+                    <h3 className="mt-4">Leaderboard</h3>
+                    <LeaderboardTable leaderboard={leaderboard} />
                 </div>
             )}
             <div className="text-center mt-3">
-                <Button variant="secondary" onClick={handleAbandon}>Abandon</Button>
+                {gameOver ? (
+                    <Button variant="success" onClick={handleFinish}>Finish</Button>
+                ) : (
+                    <Button variant="secondary" onClick={handleFinish}>Abandon</Button>
+                )}
             </div>
         </Container>
     );
 };
 
 export default Game;
+
+
+
 
 
