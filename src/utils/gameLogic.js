@@ -1,22 +1,22 @@
-import { shuffle } from './shuffle';
+//import { shuffle } from './shuffle';
 
 /**
  * Shuffles the given array of cards.
  * @param {Array} cards - Array of card objects.
  * @returns {Array} - Shuffled array of card objects.
  */
-export function shuffleCards(cards) {
+/**export function shuffleCards(cards) {
     return shuffle(cards);
-}
+}**/
 
 /**
  * Checks if all cards on the board are flipped.
  * @param {Array} cards - Array of card objects representing the game board.
  * @returns {boolean} - True if all cards are flipped, false otherwise.
  */
-export function allCardsFlipped(cards) {
+/**export function allCardsFlipped(cards) {
     return cards.every(card => card.isFlipped);
-}
+}**/
 
 /**
  * Handles the click event on a card.
@@ -27,7 +27,7 @@ export function allCardsFlipped(cards) {
  * @param {Function} setSelectedCards - Function to update the state of selected cards.
  * @param {Function} setSteps - Function to update the number of steps.
  */
-export function handleCardClick(cardId, selectedCards, cards, setCards, setSelectedCards, setSteps) {
+/**export function handleCardClick(cardId, selectedCards, cards, setCards, setSelectedCards, setSteps) {
     const selectedCard = cards.find(card => card.id === cardId);
 
     // If the selected card is already flipped or if there are already two selected cards, return
@@ -48,7 +48,7 @@ export function handleCardClick(cardId, selectedCards, cards, setCards, setSelec
     if (newSelectedCards.length === 2) {
         checkMatch(newSelectedCards, cards, setCards, setSelectedCards, setSteps);
     }
-}
+}**/
 
 /**
  * Checks if two selected cards are a match.
@@ -59,7 +59,7 @@ export function handleCardClick(cardId, selectedCards, cards, setCards, setSelec
  * @param {Function} setSelectedCards - Function to update the state of selected cards.
  * @param {Function} setSteps - Function to update the number of steps.
  */
-function checkMatch(selectedCards, cards, setCards, setSelectedCards, setSteps) {
+/**function checkMatch(selectedCards, cards, setCards, setSelectedCards, setSteps) {
     const [firstCardId, secondCardId] = selectedCards;
     const firstCard = cards.find(card => card.id === firstCardId);
     const secondCard = cards.find(card => card.id === secondCardId);
@@ -79,4 +79,20 @@ function checkMatch(selectedCards, cards, setCards, setSelectedCards, setSteps) 
             setSteps(steps => steps + 1);
         }, 1000);
     }
-}
+}**/
+
+export const shuffleCards = (rows, cols) => {
+    const cardImages = Array.from({ length: (rows * cols) / 2 }, (_, i) => `${i % 16}.jpg`);
+    const cards = [...cardImages, ...cardImages].map((image, index) => ({ id: index, image }));
+    for (let i = cards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [cards[i], cards[j]] = [cards[j], cards[i]];
+    }
+    return cards;
+};
+
+export const checkMatch = (card1, card2) => {
+    return card1.image === card2.image;
+};
+
+
