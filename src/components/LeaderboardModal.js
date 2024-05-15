@@ -34,7 +34,8 @@ export default LeaderboardModal;**/
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, Table, Button } from 'react-bootstrap';
+import { Container, Button } from 'react-bootstrap';
+import LeaderboardTable from './LeaderboardTable';
 
 const Leaderboard = () => {
     const navigate = useNavigate();
@@ -43,34 +44,12 @@ const Leaderboard = () => {
     return (
         <Container className="mt-5">
             <h1 className="text-center">Leaderboard</h1>
-            <Table striped bordered hover>
-                <thead>
-                <tr>
-                    <th>Rank</th>
-                    <th>Name</th>
-                    <th>Score</th>
-                </tr>
-                </thead>
-                <tbody>
-                {leaderboard.length === 0 ? (
-                    <tr>
-                        <td colSpan="4" className="text-center">No scores yet!</td>
-                    </tr>
-                ) : (
-                    leaderboard.sort((a, b) => b.score - a.score).map((entry, index) => (
-                        <tr key={index}>
-                            <td>{index + 1}</td>
-                            <td>{entry.name}</td>
-                            <td>{entry.score}</td>
-                        </tr>
-                    ))
-                )}
-                </tbody>
-            </Table>
+            <LeaderboardTable leaderboard={leaderboard} />
             <Button variant="secondary" className="mt-3" onClick={() => navigate('/')}>Back</Button>
         </Container>
     );
 };
 
 export default Leaderboard;
+
 
