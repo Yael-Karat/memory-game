@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import StartScreen from './components/EntranceScreen';
 import Game from './components/GameScreen';
-import Leaderboard from './components/GameSettingsModal';
+import Leaderboard from './components/LeaderboardModal';
 
 const App = () => (
     <Routes>
