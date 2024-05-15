@@ -1,4 +1,4 @@
-import React from 'react';
+/**import React from 'react';
 import { loadLeaderboard } from '../utils/storage';
 import { Table } from 'react-bootstrap';
 
@@ -30,4 +30,43 @@ function LeaderboardModal() {
     );
 }
 
-export default LeaderboardModal;
+export default LeaderboardModal;**/
+
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Container, Table, Button } from 'react-bootstrap';
+
+const Leaderboard = () => {
+    const navigate = useNavigate();
+    const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+
+    return (
+        <Container className="mt-5">
+            <h1 className="text-center">Leaderboard</h1>
+            <Table striped bordered hover>
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Score</th>
+                    <th>Steps</th>
+                </tr>
+                </thead>
+                <tbody>
+                {leaderboard.sort((a, b) => b.score - a.score).map((entry, index) => (
+                    <tr key={index}>
+                        <td>{index + 1}</td>
+                        <td>{entry.name}</td>
+                        <td>{entry.score}</td>
+                        <td>{entry.steps}</td>
+                    </tr>
+                ))}
+                </tbody>
+            </Table>
+            <Button variant="secondary" className="mt-3" onClick={() => navigate('/')}>Back</Button>
+        </Container>
+    );
+};
+
+export default Leaderboard;
+
