@@ -82,6 +82,7 @@ const Game = () => {
     const [flippedCards, setFlippedCards] = useState([]);
     const [matchedCards, setMatchedCards] = useState([]);
     const [steps, setSteps] = useState(0);
+    const [gameOver, setGameOver] = useState(false);
 
     useEffect(() => {
         if (!name || !settings) {
@@ -96,13 +97,19 @@ const Game = () => {
         if (flippedCards.length === 2) {
             const [first, second] = flippedCards;
             if (checkMatch(first, second)) {
-                setMatchedCards([...matchedCards, first.id, second.id]);
+                setMatchedCards((prev) => [...prev, first.id, second.id]);
             }
             setTimeout(() => {
                 setFlippedCards([]);
             }, duration * 1000);
         }
-    }, [flippedCards, matchedCards, duration]);
+    }, [flippedCards, duration]);
+
+    useEffect(() => {
+        if (matchedCards.length === cards.length && cards.length > 0) {
+            setGameOver(true);
+        }
+    }, [matchedCards, cards]);
 
     const handleCardClick = (id) => {
         if (flippedCards.length === 2 || matchedCards.includes(id) || flippedCards.some(card => card.id === id)) {
@@ -116,8 +123,6 @@ const Game = () => {
     const handleAbandon = () => {
         navigate('/');
     };
-
-    const gameOver = matchedCards.length === cards.length;
 
     useEffect(() => {
         if (gameOver) {
