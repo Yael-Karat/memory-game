@@ -1,23 +1,15 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import EntranceScreen from './components/EntranceScreen';
-import GameScreen from './components/GameScreen';
-import LeaderboardModal from './components/LeaderboardModal';
-import GameSettingsModal from './components/GameSettingsModal';
+import { Routes, Route } from 'react-router-dom';
+import StartScreen from './components/EntranceScreen';
+import Game from './components/GameScreen';
+import Leaderboard from './components/GameSettingsModal';
 
-function App() {
-    return (
-        <Router>
-            <div className="container">
-                <Routes>
-                    <Route path="/" element={<EntranceScreen />} />
-                    <Route path="/game" element={<GameScreen />} />
-                    <Route path="/leaderboard" element={<LeaderboardModal />} />
-                    <Route path="/settings" element={<GameSettingsModal />} />
-                </Routes>
-            </div>
-        </Router>
-    );
-}
+const App = () => (
+    <Routes>
+        <Route path="/" element={<StartScreen />} />
+        <Route path="/game" element={<Game />} />
+        <Route path="/leaderboard" element={<Leaderboard />} />
+    </Routes>
+);
 
 export default App;
