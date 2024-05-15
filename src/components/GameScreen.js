@@ -83,6 +83,8 @@ const Game = () => {
     const [matchedCards, setMatchedCards] = useState([]);
     const [steps, setSteps] = useState(0);
     const [gameOver, setGameOver] = useState(false);
+    const [playerRank, setPlayerRank] = useState(null);
+    const [finalScore, setFinalScore] = useState(null);
 
     useEffect(() => {
         if (!name || !settings) {
@@ -127,10 +129,24 @@ const Game = () => {
     useEffect(() => {
         if (gameOver) {
             const score = calculateScore(rows * cols, steps);
+            setFinalScore(score);
             const leaderboard = loadFromLocalStorage('leaderboard') || [];
-            const newEntry = { name, score, cards: rows * cols };
-            const updatedLeaderboard = [...leaderboard, newEntry].sort((a, b) => a.score - b.score);
-            saveToLocalStorage('leaderboard', updatedLeaderboard);
+            const normalizedName = name.trim().toLowerCase();
+            const existingEntry = leaderboard.find(entry => entry.name === normalizedName);
+            if (existingEntry) {
+                if (score > existingEntry.score) {
+                    existingEntry.score = score;
+                    existingEntry.cards = rows * cols;
+                }
+            } else {
+                const newEntry = { name: normalizedName, score, cards: rows * cols };
+                leaderboard.push(newEntry);
+            }
+            leaderboard.sort((a, b) => b.score - a.score);
+            saveToLocalStorage('leaderboard', leaderboard);
+
+            const rank = leaderboard.findIndex(entry => entry.name === normalizedName) + 1;
+            setPlayerRank(rank);
         }
     }, [gameOver, name, rows, cols, steps]);
 
@@ -153,8 +169,10 @@ const Game = () => {
             {gameOver && (
                 <div className="text-center mt-4">
                     <h2>Game Over</h2>
-                    <p>Player: {name}</p>
-                    <p>Score: {calculateScore(rows * cols, steps)}</p>
+                    <p>Name: {name}</p>
+                    <p>Score: {finalScore}</p>
+                    <p>Rank: {playerRank}</p>
+                    <p>Number of cards: {rows * cols}</p>
                     <Button variant="info" onClick={() => navigate('/leaderboard')}>View Leaderboard</Button>
                 </div>
             )}
@@ -166,3 +184,5 @@ const Game = () => {
 };
 
 export default Game;
+
+
