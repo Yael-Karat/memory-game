@@ -75,9 +75,10 @@ const StartScreen = () => {
             <h1 className="text-center">Memory Game</h1>
             <Form>
                 <Form.Group controlId="name">
-                    <Form.Label>Enter your name:</Form.Label>
+                    <Form.Label>Name:</Form.Label>
                     <Form.Control
                         type="text"
+                        placeholder="Enter your name including letters and digits only"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         maxLength="12"
