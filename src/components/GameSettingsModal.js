@@ -1,46 +1,85 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Button, Form } from 'react-bootstrap';
+import { Modal, Button, Form } from 'react-bootstrap';
 
-function GameSettingsModal() {
-    const [rows, setRows] = useState(4);
-    const [columns, setColumns] = useState(4);
-    const [duration, setDuration] = useState(1.0);
-    const navigate = useNavigate();
+const SettingsModal = ({ show, onHide, settings, setSettings, onSave, defaultSettings }) => {
+    const [error, setError] = useState('');
 
-    const handleStartGame = () => {
-        if ((rows * columns) % 2 !== 0) {
-            alert('Number of cards (rows x columns) must be even, please correct your choice.');
-            return;
-        }
-        navigate('/game');
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setSettings({ ...settings, [name]: parseFloat(value) });
+        setError('');
     };
 
-    const handleCancel = () => {
-        navigate('/');
+    const handleSave = () => {
+        if ((settings.rows * settings.cols) % 2 !== 0) {
+            setError('Number of cards (rows X columns) must be even, please correct your choice.');
+            return;
+        }
+        setError('');
+        onSave();
+        onHide();
+    };
+
+    const handleClose = () => {
+        setSettings(defaultSettings);
+        setError('');
+        onHide();
     };
 
     return (
-        <div className="mt-5">
-            <h1>Game Settings</h1>
-            <Form>
-                <Form.Group controlId="formRows">
-                    <Form.Label>Number of rows:</Form.Label>
-                    <Form.Control type="number" value={rows} min={2} max={5} onChange={(e) => setRows(parseInt(e.target.value))} />
-                </Form.Group>
-                <Form.Group controlId="formColumns">
-                    <Form.Label>Number of columns:</Form.Label>
-                    <Form.Control type="number" value={columns} min={2} max={5} onChange={(e) => setColumns(parseInt(e.target.value))} />
-                </Form.Group>
-                <Form.Group controlId="formDuration">
-                    <Form.Label>Duration (in seconds):</Form.Label>
-                    <Form.Control type="number" value={duration} min={0.5} max={2.0} step={0.1} onChange={(e) => setDuration(parseFloat(e.target.value))} />
-                </Form.Group>
-                <Button variant="primary" className="mr-2" onClick={handleStartGame}>Start Game</Button>
-                <Button variant="secondary" onClick={handleCancel}>Cancel</Button>
-            </Form>
-        </div>
+        <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+                <Modal.Title>Game Settings</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <Form>
+                    <Form.Group controlId="rows">
+                        <Form.Label>Number of rows:</Form.Label>
+                        <Form.Control
+                            as="select"
+                            name="rows"
+                            value={settings.rows}
+                            onChange={handleChange}
+                        >
+                            {[2, 3, 4, 5].map((num) => (
+                                <option key={num} value={num}>{num}</option>
+                            ))}
+                        </Form.Control>
+                    </Form.Group>
+                    <Form.Group controlId="cols">
+                        <Form.Label>Number of columns:</Form.Label>
+                        <Form.Control
+                            as="select"
+                            name="cols"
+                            value={settings.cols}
+                            onChange={handleChange}
+                        >
+                            {[2, 3, 4, 5].map((num) => (
+                                <option key={num} value={num}>{num}</option>
+                            ))}
+                        </Form.Control>
+                    </Form.Group>
+                    <Form.Group controlId="duration">
+                        <Form.Label>Duration (seconds):</Form.Label>
+                        <Form.Control
+                            type="number"
+                            step="0.1"
+                            min="0.5"
+                            max="2.0"
+                            name="duration"
+                            value={settings.duration}
+                            onChange={handleChange}
+                        />
+                    </Form.Group>
+                    {error && <div className="text-danger mt-2">{error}</div>}
+                </Form>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>Close</Button>
+                <Button variant="primary" onClick={handleSave}>Save</Button>
+            </Modal.Footer>
+        </Modal>
     );
-}
+};
 
-export default GameSettingsModal;
+export default SettingsModal;
