@@ -2,14 +2,24 @@
  * Saves the leaderboard data to local storage.
  * @param {Array} leaderboard - Array of player objects with name and score.
  */
-export const saveLeaderboard = (leaderboard) => {
+/**export const saveLeaderboard = (leaderboard) => {
     localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
-};
+};**/
 
 /**
  * Loads the leaderboard data from local storage.
  * @returns {Array} - Array of player objects with name and score.
  */
-export const loadLeaderboard = () => {
+/**export const loadLeaderboard = () => {
     return JSON.parse(localStorage.getItem('leaderboard')) || [];
+};**/
+
+
+export const saveToLocalStorage = (key, value) => {
+    localStorage.setItem(key, JSON.stringify(value));
+};
+
+export const loadFromLocalStorage = (key) => {
+    const storedValue = localStorage.getItem(key);
+    return storedValue ? JSON.parse(storedValue) : null;
 };
