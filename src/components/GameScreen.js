@@ -92,28 +92,30 @@ const Game = () => {
             <h1 className="text-center">Memory Game</h1>
             <p className="text-center">Click on the cards to flip them and find the matching pairs with as few flips as possible.</p>
             <div className="text-center mb-3">Steps: {steps}</div>
-            <div style={{
-                display: 'grid',
-                gridTemplateColumns: `repeat(${cols}, 1fr)`,
-                gap: '1rem',
-                justifyItems: 'center',
-                alignItems: 'stretch',
-                margin: '0 auto',
-                maxWidth: '650px',
-                border: '1px solid #DEDEDE',
-                padding: '12px',
-                boxShadow: '0 0 4px 4px #DEDEDE'
-            }}>
-                {cards.map((card) => (
-                    <div key={card.id} style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-                        <Card
-                            card={card}
-                            isFlipped={flippedCards.includes(card) || matchedCards.includes(card.id)}
-                            onClick={() => handleCardClick(card.id)}
-                        />
-                    </div>
-                ))}
-            </div>
+            {!gameOver && (
+                <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: `repeat(${cols}, 1fr)`,
+                    gap: '1rem',
+                    justifyItems: 'center',
+                    alignItems: 'stretch',
+                    margin: '0 auto',
+                    maxWidth: '650px',
+                    border: '1px solid #DEDEDE',
+                    padding: '12px',
+                    boxShadow: '0 0 4px 4px #DEDEDE'
+                }}>
+                    {cards.map((card) => (
+                        <div key={card.id} style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                            <Card
+                                card={card}
+                                isFlipped={flippedCards.includes(card) || matchedCards.includes(card.id)}
+                                onClick={() => handleCardClick(card.id)}
+                            />
+                        </div>
+                    ))}
+                </div>
+            )}
             {gameOver && (
                 <div className="text-center mt-4">
                     <h2>Game Over</h2>
