@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 
-const SettingsModal = ({ show, onHide, settings, setSettings, onSave, defaultSettings }) => {
+const SettingsModal = ({ show, onHide, settings, setSettings, defaultSettings }) => {
     const [error, setError] = useState('');
 
     const handleChange = (e) => {
@@ -16,7 +16,7 @@ const SettingsModal = ({ show, onHide, settings, setSettings, onSave, defaultSet
             return;
         }
         setError('');
-        onSave();
+        // onSave();
         onHide();
     };
 
@@ -47,7 +47,7 @@ const SettingsModal = ({ show, onHide, settings, setSettings, onSave, defaultSet
                         </Form.Control>
                     </Form.Group>
                     <Form.Group controlId="cols">
-                        <Form.Label>Number of columns:</Form.Label>
+                        <Form.Label className="mt-3">Number of columns:</Form.Label>
                         <Form.Control
                             as="select"
                             name="cols"
@@ -60,7 +60,7 @@ const SettingsModal = ({ show, onHide, settings, setSettings, onSave, defaultSet
                         </Form.Control>
                     </Form.Group>
                     <Form.Group controlId="duration">
-                        <Form.Label>Duration (seconds):</Form.Label>
+                        <Form.Label className="mt-3">Delay (seconds):</Form.Label>
                         <Form.Control
                             type="number"
                             step="0.1"

@@ -13,8 +13,8 @@ const StartScreen = () => {
     const navigate = useNavigate();
 
     const handleStart = () => {
-        if (name.trim() === '' || name.length > 12 || /\W/.test(name)) {
-            setError('Please enter a valid name with up to 12 alphanumeric characters.');
+        if (name.trim() === '' || name.length > 12 || /[^A-Za-z0-9]/.test(name.trim())) {
+            setError('Please enter a valid Username with up to 12 alphanumeric characters.');
             return;
         }
         if ((settings.rows * settings.cols) % 2 !== 0) {
@@ -25,22 +25,26 @@ const StartScreen = () => {
         navigate('/game', { state: { name, settings } });
     };
 
-    const handleSaveSettings = () => {
-        // Settings are already updated in the state
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            handleStart();
+        }
     };
 
     return (
         <Container className="mt-5">
             <h1 className="text-center">Memory Game</h1>
-            <Form>
+            <Form onSubmit={(e) => e.preventDefault()}>
                 <Form.Group controlId="name">
-                    <Form.Label>Name:</Form.Label>
+                    <Form.Label>Username:</Form.Label>
                     <Form.Control
                         type="text"
-                        placeholder="Enter your name including letters and digits only"
+                        placeholder="Enter your Username including letters and digits only"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         maxLength="12"
+                        onKeyDown={handleKeyDown}
                     />
                 </Form.Group>
                 {error && <div className="text-danger mt-2">{error}</div>}
@@ -53,7 +57,6 @@ const StartScreen = () => {
                 onHide={() => setShowSettings(false)}
                 settings={settings}
                 setSettings={setSettings}
-                onSave={handleSaveSettings}
                 defaultSettings={defaultSettings}
             />
         </Container>
