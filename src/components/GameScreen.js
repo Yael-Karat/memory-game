@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Container, Button} from 'react-bootstrap';
+import { Container, Button } from 'react-bootstrap';
 import Card from './Card';
 import { shuffleCards, checkMatch } from '../utils/gameLogic';
 import { calculateScore } from '../utils/scoreCalculator';
 import { saveToLocalStorage, loadFromLocalStorage } from '../utils/storage';
 import LeaderboardTable from './LeaderboardTable';
 import { playMatchSound, playPopSound, playSuccessSound } from '../utils/soundEffects';
+// import './GameScreen.css';
 
 const Game = () => {
     const location = useLocation();
@@ -40,7 +41,6 @@ const Game = () => {
                 setTimeout(() => {
                     playSuccessSound();
                 }, 0.3 * 1000);
-                // playMatchSound(); // Play sound effect when a match is found
             }
             setTimeout(() => {
                 setFlippedCards([]);
@@ -109,13 +109,13 @@ const Game = () => {
                     justifyItems: 'center',
                     alignItems: 'stretch',
                     margin: '0 auto',
-                    maxWidth: '500px',
+                    maxWidth: '530px',
                     border: '1px solid #DEDEDE',
                     padding: '5px',
                     boxShadow: '0 0 4px 4px #DEDEDE'
                 }}>
                     {cards.map((card) => (
-                        <div key={card.id} style={{ width: '100%', height: 'auto', display: 'flex', justifyContent: 'center' }}>
+                        <div key={card.id} style={{ width: '100%' }}>
                             <Card
                                 card={card}
                                 isFlipped={flippedCards.includes(card) || matchedCards.includes(card.id)}
