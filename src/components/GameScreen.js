@@ -6,6 +6,7 @@ import { shuffleCards, checkMatch } from '../utils/gameLogic';
 import { calculateScore } from '../utils/scoreCalculator';
 import { saveToLocalStorage, loadFromLocalStorage } from '../utils/storage';
 import LeaderboardTable from './LeaderboardTable';
+import { playMatchSound, playPopSound, playSuccessSound } from '../utils/soundEffects';
 
 const Game = () => {
     const location = useLocation();
@@ -36,6 +37,10 @@ const Game = () => {
             const [first, second] = flippedCards;
             if (checkMatch(first, second)) {
                 setMatchedCards((prev) => [...prev, first.id, second.id]);
+                setTimeout(() => {
+                    playSuccessSound();
+                }, 0.3 * 1000);
+                // playMatchSound(); // Play sound effect when a match is found
             }
             setTimeout(() => {
                 setFlippedCards([]);
@@ -46,6 +51,9 @@ const Game = () => {
     useEffect(() => {
         if (matchedCards.length === cards.length && cards.length > 0) {
             setGameOver(true);
+            setTimeout(() => {
+                playMatchSound();
+            }, 2.3 * 1000);
         }
     }, [matchedCards, cards]);
 
@@ -53,6 +61,7 @@ const Game = () => {
         if (flippedCards.length === 2 || matchedCards.includes(id) || flippedCards.some(card => card.id === id)) {
             return;
         }
+        playPopSound();
         const clickedCard = cards.find(card => card.id === id);
         setFlippedCards([...flippedCards, clickedCard]);
         setSteps(steps + 1);
@@ -88,7 +97,7 @@ const Game = () => {
     }, [gameOver, name, rows, cols, steps]);
 
     return (
-        <Container className="mt-5">
+        <Container className="mt-2">
             <h1 className="text-center">Memory Game</h1>
             <p className="text-center">Click on the cards to flip them and find the matching pairs with as few flips as possible.</p>
             <div className="text-center mb-3">Steps: {steps}</div>
@@ -100,13 +109,13 @@ const Game = () => {
                     justifyItems: 'center',
                     alignItems: 'stretch',
                     margin: '0 auto',
-                    maxWidth: '650px',
+                    maxWidth: '500px',
                     border: '1px solid #DEDEDE',
-                    padding: '12px',
+                    padding: '5px',
                     boxShadow: '0 0 4px 4px #DEDEDE'
                 }}>
                     {cards.map((card) => (
-                        <div key={card.id} style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                        <div key={card.id} style={{ width: '100%', height: 'auto', display: 'flex', justifyContent: 'center' }}>
                             <Card
                                 card={card}
                                 isFlipped={flippedCards.includes(card) || matchedCards.includes(card.id)}
