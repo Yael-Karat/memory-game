@@ -1,17 +1,32 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Form, Button } from 'react-bootstrap';
-import SettingsModal from './GameSettingsModal';
+import SettingsModal from './SettingsModal';
 
+// Default game settings
 const defaultSettings = { rows: 4, cols: 4, duration: 1 };
 
+/**
+ * StartScreen Component
+ *
+ * This component renders the start screen of the memory game where users can enter their username,
+ * adjust game settings, and navigate to the game or leaderboard.
+ *
+ * @returns {JSX.Element} The rendered start screen component.
+ */
 const StartScreen = () => {
-    const [name, setName] = useState('');
-    const [showSettings, setShowSettings] = useState(false);
-    const [settings, setSettings] = useState(defaultSettings);
-    const [error, setError] = useState('');
-    const navigate = useNavigate();
+    const [name, setName] = useState(''); // State for the username
+    const [showSettings, setShowSettings] = useState(false); // State to control the visibility of the settings modal
+    const [settings, setSettings] = useState(defaultSettings); // State for the game settings
+    const [error, setError] = useState(''); // State for error messages
+    const navigate = useNavigate(); // Hook to navigate programmatically
 
+    /**
+     * Handles the start button click.
+     * Validates the username and settings, then navigates to the game screen if valid.
+     *
+     * @returns {void}
+     */
     const handleStart = () => {
         if (name.trim() === '' || name.length > 12 || /[^A-Za-z0-9]/.test(name.trim())) {
             setError('Please enter a valid Username with up to 12 alphanumeric characters.');
@@ -25,6 +40,13 @@ const StartScreen = () => {
         navigate('/game', { state: { name, settings } });
     };
 
+    /**
+     * Handles the 'Enter' key press in the username input field.
+     * Triggers the start button click handler.
+     *
+     * @param {KeyboardEvent} event - The keyboard event.
+     * @returns {void}
+     */
     const handleKeyDown = (event) => {
         if (event.key === 'Enter') {
             event.preventDefault();

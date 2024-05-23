@@ -1,3 +1,14 @@
+/**
+ * Shuffles the array of card images and returns the shuffled cards.
+ *
+ * This function generates a shuffled set of card images based on the provided
+ * number of rows and columns. It ensures that the cards are selected and shuffled
+ * randomly for each game.
+ *
+ * @param {number} rows - The number of rows in the game board.
+ * @param {number} cols - The number of columns in the game board.
+ * @returns {Array} The shuffled array of card objects with unique IDs and image paths.
+ */
 export const shuffleArray = (rows, cols) => {
     const totalCards = rows * cols;
     const halfTotalCards = totalCards / 2;

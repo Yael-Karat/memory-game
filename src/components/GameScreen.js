@@ -7,9 +7,16 @@ import { calculateScore } from '../utils/scoreCalculator';
 import { saveToLocalStorage, loadFromLocalStorage } from '../utils/storage';
 import LeaderboardTable from './LeaderboardTable';
 import { playMatchSound, playPopSound, playSuccessSound } from '../utils/soundEffects';
-// import './GameScreen.css';
 
-const Game = () => {
+/**
+ * GameScreen Component
+ *
+ * This component represents the game screen where the user plays the memory game.
+ * It handles the game logic, card flipping, matching logic, and leaderboard updates.
+ *
+ * @returns {JSX.Element} The rendered game screen component.
+ */
+const GameScreen = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const { name, settings } = location.state || {};
@@ -24,6 +31,9 @@ const Game = () => {
     const [finalScore, setFinalScore] = useState(null);
     const [leaderboard, setLeaderboard] = useState([]);
 
+    /**
+     * Initializes the game by shuffling the cards and setting the initial state.
+     */
     useEffect(() => {
         if (!name || !settings) {
             navigate('/');
@@ -33,13 +43,17 @@ const Game = () => {
         setCards(shuffledCards);
     }, [name, settings, navigate, rows, cols]);
 
+    /**
+     * Handles the logic for checking if two flipped cards match.
+     * If they match, they are added to the matchedCards state.
+     */
     useEffect(() => {
         if (flippedCards.length === 2) {
             const [first, second] = flippedCards;
             if (checkMatch(first, second)) {
                 setMatchedCards((prev) => [...prev, first.id, second.id]);
                 setTimeout(() => {
-                    playSuccessSound();
+                    playMatchSound();
                 }, 0.3 * 1000);
             }
             setTimeout(() => {
@@ -48,15 +62,24 @@ const Game = () => {
         }
     }, [flippedCards, duration]);
 
+    /**
+     * Checks if all cards have been matched, and if so, ends the game.
+     */
     useEffect(() => {
         if (matchedCards.length === cards.length && cards.length > 0) {
             setGameOver(true);
             setTimeout(() => {
-                playMatchSound();
+                playSuccessSound();
             }, 2.3 * 1000);
         }
     }, [matchedCards, cards]);
 
+    /**
+     * Handles the card click event.
+     * Flips the card and updates the state.
+     *
+     * @param {number} id - The ID of the clicked card.
+     */
     const handleCardClick = (id) => {
         if (flippedCards.length === 2 || matchedCards.includes(id) || flippedCards.some(card => card.id === id)) {
             return;
@@ -67,10 +90,18 @@ const Game = () => {
         setSteps(steps + 1);
     };
 
+    /**
+     * Handles the finish or abandon button click event.
+     * Navigates the user back to the start screen.
+     */
     const handleFinish = () => {
         navigate('/');
     };
 
+    /**
+     * Updates the leaderboard when the game is over.
+     * Saves the player's score and rank in the leaderboard.
+     */
     useEffect(() => {
         if (gameOver) {
             const score = calculateScore(rows * cols, steps);
@@ -147,4 +178,4 @@ const Game = () => {
     );
 };
 
-export default Game;
+export default GameScreen;

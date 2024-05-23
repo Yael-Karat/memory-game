@@ -1,6 +1,15 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
 
+/**
+ * LeaderboardTable Component
+ *
+ * This component displays the leaderboard in a table format. It shows the ranks, names, and scores of players.
+ *
+ * @param {Object} props - The component props.
+ * @param {Array} props.leaderboard - An array of leaderboard entries where each entry contains the player's name and score.
+ * @returns {JSX.Element} The rendered leaderboard table component.
+ */
 const LeaderboardTable = ({ leaderboard }) => {
     return (
         <Table striped bordered hover>
