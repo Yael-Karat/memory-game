@@ -1,22 +1,18 @@
-# React exercise - Internet Programming Course
+## Authors
+<p>
+  <span><strong>Amit Lap & Yael Karat</strong></span>
+  (<a href="https://github.com/Yael-Karat">@Yael-Karat</a>)
+</p>
+
+## React
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 You need to add relevant npm libraries and of course run npm install.
-You are given sample images for the project in the public folder. Feel free to use them or replace them with your own images.
-## Authors
 
-<h1>Yael Karat</h1>
-<p>Email: yaelkara@edu.hac.ac.il</p>
-
-<h1>Amit Lap</h1>
-<p>Email: amitlap@edu.hac.ac.il</p>
-<br>
-
-
-### Program Description
+## Program Description
 
 The Memory Game program is a React web-based application where players flip over cards to find matching pairs. The game includes features such as customizable game settings, a leaderboard to track high scores, and sound effects to enhance the user experience. Players start by entering their username and selecting game settings such as the number of rows and columns for the card grid and the delay time (seconds) after flipping 2 unmatched cards. The goal is to find all matching pairs with as few flips as possible.
 
-### GameFlow of the Program
+### GameFlow of the Program:
 
 1. **Start Screen**:
     - The player enters their username and can customize game settings.
@@ -40,7 +36,7 @@ The Memory Game program is a React web-based application where players flip over
     - Displays the player's name with the player's rank and the player's highest score.
     - Players can return to the start screen to play again or change settings.
 
-### Algorithm for Selecting the Cards
+### Algorithm for Selecting the Cards:
 
 The card selection and shuffling process involves the following steps:
 
@@ -66,7 +62,7 @@ The card selection and shuffling process involves the following steps:
     - Map each index to an image filename (e.g., `3` becomes `3.jpg`).
     - Create card objects with a unique ID and the image filename. For example, the card object might look like `{ id: 0, image: '3.jpg' }`.
 
-### Score Calculation
+### Score Calculation:
 
 The score is calculated based on the number of steps taken to complete the game:
 
