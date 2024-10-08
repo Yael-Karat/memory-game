@@ -4,9 +4,9 @@
 **Amit Lap** & **Yael Karat** - [@Yael-Karat](https://github.com/Yael-Karat)
 
 ## Program Description
-The Memory Game program is a React web-based application where players flip over cards to find matching pairs.
-The game includes features such as customizable game settings, a leaderboard to track high scores, and sound effects to enhance the user experience.
-Players start by entering their username and selecting game settings such as the number of rows and columns for the card grid and the delay time (seconds) after flipping 2 unmatched cards.
+The Memory Game program is a React web-based application where players flip over cards to find matching pairs.  
+The game includes features such as customizable game settings, a leaderboard to track high scores, and sound effects to enhance the user experience.  
+Players start by entering their username and selecting game settings such as the number of rows and columns for the card grid and the delay time (seconds) after flipping 2 unmatched cards.  
 The goal is to find all matching pairs with as few flips as possible.
 
 ### GameFlow of the Program:
@@ -37,7 +37,8 @@ The goal is to find all matching pairs with as few flips as possible.
 The card selection and shuffling process involves the following steps:
 
 1. **Generate Indices for Cards**:
-    - Create an array of indices representing the images available. For example, if you have 16 unique images, create an array `[0, 1, 2, ..., 15]`.
+    - Create an array of indices representing the images available.  
+   For example, if you have 16 unique images, create an array `[0, 1, 2, ..., 15]`.
 
 2. **Shuffle the Array of Indices**:
     - Shuffle the array to randomize the order of the indices. This ensures that the selected cards will be in a random order each time the game starts.
@@ -56,7 +57,8 @@ The card selection and shuffling process involves the following steps:
 
 6. **Assign Images to Cards**:
     - Map each index to an image filename (e.g., `3` becomes `3.jpg`).
-    - Create card objects with a unique ID and the image filename. For example, the card object might look like `{ id: 0, image: '3.jpg' }`.
+    - Create card objects with a unique ID and the image filename.  
+   For example, the card object might look like `{ id: 0, image: '3.jpg' }`.
 
 ### Score Calculation:
 
@@ -72,7 +74,6 @@ The score is calculated based on the number of steps taken to complete the game:
     - The final score is the base score minus the step penalties, encouraging players to complete the game in as few steps as possible.
 
 ### Sound Effects
-
 The game includes sound effects to enhance the UX:
 
 1. **Match Sound**:
@@ -89,6 +90,28 @@ These sound effects are triggered at appropriate moments during gameplay to prov
 ## React
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 You need to add relevant npm libraries and of course run npm install.
+
+## Installation
+
+### Prerequisites:
+- Node.js and npm installed
+- Java Development Kit (JDK) installed
+
+### Steps:
+1. **Clone the repository:**
+    ```bash
+    git clone https://github.com/your-username/memory-game.git
+    ```
+
+2. **Navigate to the project directory:**
+    ```bash
+    cd memory-game
+    ```
+
+3. **Start the server:**
+    ```bash
+    npm start
+    ```
 
 ## Available Scripts
 
