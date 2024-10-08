@@ -1,8 +1,5 @@
 ## Authors
-<p>
-  <span><strong>Amit Lap & Yael Karat</strong></span>
-  (<a href="https://github.com/Yael-Karat">@Yael-Karat</a>)
-</p>
+**Amit Lap** & **Yael Karat** - [@Yael-Karat](https://github.com/Yael-Karat)
 
 ## React
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
