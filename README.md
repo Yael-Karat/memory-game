@@ -1,15 +1,18 @@
 # <img src="https://github.com/user-attachments/assets/8e6794b9-31e3-447e-9c6d-3fb2f9ef913f" alt="Cartoonnetwork Matching Cards GIF" style="width: 100px; height: auto;"> Memory Game
 
 ## Authors
+
 **Amit Lap** & **Yael Karat** - [@Yael-Karat](https://github.com/Yael-Karat)
 
 ## Program Description
+
 The Memory Game program is a React web-based application where players flip over cards to find matching pairs.  
 The game includes features such as customizable game settings, a leaderboard to track high scores, and sound effects to enhance the user experience.  
 Players start by entering their username and selecting game settings such as the number of rows and columns for the card grid and the delay time (seconds) after flipping 2 unmatched cards.  
 The goal is to find all matching pairs with as few flips as possible.
 
 ### GameFlow of the Program:
+
 1. **Start Screen**:
     - The player enters their username and can customize game settings.
     - Validation ensures the username is alphanumeric and no more than 12 characters.
@@ -73,7 +76,8 @@ The score is calculated based on the number of steps taken to complete the game:
 3. **Final Score**:
     - The final score is the base score minus the step penalties, encouraging players to complete the game in as few steps as possible.
 
-### Sound Effects
+### Sound Effects:
+
 The game includes sound effects to enhance the UX:
 
 1. **Match Sound**:
@@ -88,16 +92,17 @@ The game includes sound effects to enhance the UX:
 These sound effects are triggered at appropriate moments during gameplay to provide immediate feedback and make the game more engaging.
 
 ## React
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-You need to add relevant npm libraries and of course run npm install.
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).  
 
 ## Installation
 
 ### Prerequisites:
+
 - Node.js and npm installed
-- Java Development Kit (JDK) installed
 
 ### Steps:
+
 1. **Clone the repository:**
     ```bash
     git clone https://github.com/your-username/memory-game.git
@@ -112,40 +117,8 @@ You need to add relevant npm libraries and of course run npm install.
     ```bash
     npm start
     ```
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+    
+4. **Runs the app in the development mode:**  
+   Open [http://localhost:3000](http://localhost:3000) to view it in your browser.  
+   The page will reload when you make changes.  
+   You may also see any lint errors in the console.
