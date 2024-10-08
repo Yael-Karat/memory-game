@@ -1,4 +1,5 @@
-# 🎴 Memory Game
+# <img src="https://github.com/user-attachments/assets/8e6794b9-31e3-447e-9c6d-3fb2f9ef913f" alt="Cartoonnetwork Matching Cards GIF" style="width: 100px; height: auto;"> Memory Game
+
 ## Authors
 **Amit Lap** & **Yael Karat** - [@Yael-Karat](https://github.com/Yael-Karat)
 
