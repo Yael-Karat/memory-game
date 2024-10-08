@@ -1,3 +1,4 @@
+# 🎴 Memory Game
 ## Authors
 **Amit Lap** & **Yael Karat** - [@Yael-Karat](https://github.com/Yael-Karat)
 
